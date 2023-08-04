@@ -17,12 +17,6 @@ public class CategoryController {
     @Autowired
     private CategoryService ctServices;
 
-    @GetMapping
-    public List<CategoryModel> allCategories(@RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "2") int size) {
-        return ctServices.getAllCategories(page, size);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<CategoryModel> getCat(@PathVariable Long id) {
         CategoryModel category = ctServices.getCategoryById(id);
@@ -52,5 +46,11 @@ public class CategoryController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+     @GetMapping
+    public List<CategoryModel> allCategories(@RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "2") int size) {
+        return ctServices.getAllCategories(page, size);
     }
 }
